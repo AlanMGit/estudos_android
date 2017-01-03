@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_pt_br"
+        android:title="Voz pt_br"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_en_us"
+        android:title="Voz en_us"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_check_date"
+        android:title="Check Data"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_install_date"
+        android:title="Install Data"
+        app:showAsAction="never"/>
+</menu>
