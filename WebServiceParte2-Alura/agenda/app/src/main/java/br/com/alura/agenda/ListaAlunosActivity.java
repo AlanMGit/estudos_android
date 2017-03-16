@@ -18,11 +18,16 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
 import br.com.alura.agenda.adapter.AlunosAdapter;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.dto.AlunoSync;
+import br.com.alura.agenda.event.AtualizaListaAlunoEvent;
 import br.com.alura.agenda.modelo.Aluno;
 import br.com.alura.agenda.retrofit.RetrofitInicializador;
 import br.com.alura.agenda.tasks.EnviaAlunosTask;
@@ -39,6 +44,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
+
+        EventBus event = EventBus.getDefault();
+        event.register(this);
 
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
         mSwipeListaAlunos = (SwipeRefreshLayout) findViewById(R.id.swipe_lista_alunos);
@@ -88,6 +96,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        carregaLista();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    private void atualizaListaAlunoEvent(AtualizaListaAlunoEvent event){
         carregaLista();
     }
 
